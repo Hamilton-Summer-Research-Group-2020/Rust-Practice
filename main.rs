@@ -6,7 +6,7 @@ fn main() {
     // let is to declare a local variable
     // mut is for mutable variables
     // type matters (can probably put "use std::String;" at the top)
-    let mut n = String::new();
+    let mut n = String::new(); // n = ""
 
     // all one line but function calls spread by new line for style
     // input stdin
@@ -24,24 +24,35 @@ fn main() {
     // u32 is an unsigned 32-bit number
     // trim() removes whitespace
     // parse() parses a string to some kind of number (in this case u32)
+    // "1" -> 1
     let n: u32 = n.trim().parse().expect("Please type a number!");
+    let mut answer = Vec::new();
 
-    // immutable
-    let fiblength = n;
-
-    // print out the first n Fibonacci numbers
-    let answer = [0; fiblength];
-    for i in 0..fiblength {
-        answer[i] = fib(i);
+    for i in 0..n {
+        answer.push(fib(i));
     }
-    println!("The first {} Fibonacci numbers are {}", fiblength, answer)
+
+    println!("The first {} Fibonacci numbers are ", n);
+
+
+    print!("[");
+    for (idx, val) in answer.iter().enumerate() {
+        if idx < answer.len() - 1 {
+            print!("{}, ", val);
+        }
+        else {
+            print!("{}", val);
+        }
+    }
+    println!("]");
 }
 
 // Specifying parameter and return types (u32)
+// Fn: u32 -> u32
 fn fib(n: u32) -> u32 {
     let mut a = 1;
     let mut b = 1;
-    let mut t = 0;
+    let mut t = 1;
     for _number in 1..n {
         t = a + b;
         a = b;
